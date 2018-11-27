@@ -1,12 +1,42 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
 import './styles/index.css';
+import { Provider } from 'react-redux';
+import { createBrowserHistory } from 'history'
+import { Switch, Route } from 'react-router-dom';
+import { connectRouter, ConnectedRouter, routerMiddleware } from 'connected-react-router'
+import { createStore, applyMiddleware, combineReducers } from 'redux';
+import reducers from './store/reducers';
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import createSagaMiddleware from 'redux-saga';
+import rootSaga from './store/sagas';
+import Home from "./views/Home";
+import Login from "./containers/Login";
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
+export const history = createBrowserHistory();
+const sagaMiddleware = createSagaMiddleware();
+
+const createRootReducer = (history) => combineReducers({
+	...reducers,
+	router: connectRouter(history),
+});
+
+export const store = createStore(
+	createRootReducer(history),
+	applyMiddleware(sagaMiddleware, routerMiddleware(history))
+);
+
+sagaMiddleware.run(rootSaga);
+
+ReactDOM.render(
+	<Provider store={store}>
+		<ConnectedRouter history={history}>
+			<Switch>
+				<Route exact path='/' component={Login}/>
+				<Route path='/home' component={Home}/>
+			</Switch>
+		</ConnectedRouter>
+	</Provider>, document.getElementById('root'));
+
 serviceWorker.unregister();
