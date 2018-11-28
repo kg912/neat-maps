@@ -31,7 +31,6 @@ export function* loginRequest() {
 
 export function* loginSuccess() {
 	yield takeEvery('LOGIN_SUCCESS', function*({ userData }) {
-		console.log('LOGIN SUCCESS!');
 		yield put(push('/home'));
 	});
 }

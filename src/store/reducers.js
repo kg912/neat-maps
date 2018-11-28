@@ -1,5 +1,7 @@
 import Auth from './modules/auth/reducer';
+import Utils from './modules/utils/reducer';
 
 export default {
-	Auth
+	Auth,
+	Utils
 };

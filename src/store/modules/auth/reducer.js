@@ -4,7 +4,8 @@ import actions from './actions';
 const initState = new Map({
 	idToken: '',
 	user: {},
-	userInfo: {}
+	userInfo: {},
+	authenticated: false,
 });
 
 export default function (
@@ -13,12 +14,8 @@ export default function (
 ) {
 	switch (action.type) {
 		case actions.LOGIN_SUCCESS:
-			return state;
-		case actions.USER_DATA:
-			return state;
-		case actions.USER_DATA_UPDATE:
-			const { userInfo } = action.payload;
-			return state.set('userInfo', userInfo);
+			return state.set('userData', action.userData)
+				.set('authenticated', true);
 		case actions.LOGOUT:
 			return initState;
 		default:

@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './styles/index.css';
 import { Provider } from 'react-redux';
-import { createBrowserHistory } from 'history'
+import history from './store/history';
 import { Switch, Route } from 'react-router-dom';
 import { connectRouter, ConnectedRouter, routerMiddleware } from 'connected-react-router'
 import { createStore, applyMiddleware, combineReducers } from 'redux';
@@ -14,7 +14,6 @@ import rootSaga from './store/sagas';
 import Home from "./views/Home";
 import Login from "./containers/Login";
 
-export const history = createBrowserHistory();
 const sagaMiddleware = createSagaMiddleware();
 
 const createRootReducer = (history) => combineReducers({
