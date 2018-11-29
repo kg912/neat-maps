@@ -1,9 +1,13 @@
 const utilActions = {
-	SELECT_COLUMN: 'SELECT_COLUMN',
+	FILTER_OPTIONS: 'FILTER_OPTIONS',
 	INIT_OPTIONS: 'INIT_OPTIONS',
-	selectColumn: (name) => ({
-		type: utilActions.SELECT_COLUMN,
-		name
+	ENABLE_SELECTS: 'ENABLE_SELECTS',
+	filterOptions: (options) => ({
+		type: utilActions.FILTER_OPTIONS,
+		options
 	}),
+	enableSelects: () => ({
+		type: utilActions.ENABLE_SELECTS,
+	})
 };
 export default utilActions;

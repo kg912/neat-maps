@@ -20,6 +20,7 @@ class Login extends Component {
 			password: '',
 		};
 	}
+
 	render() {
 		return (
 			<Container>

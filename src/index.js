@@ -10,6 +10,7 @@ import reducers from './store/reducers';
 import * as serviceWorker from './serviceWorker';
 
 import createSagaMiddleware from 'redux-saga';
+import startup from './startup';
 import rootSaga from './store/sagas';
 import Home from "./views/Home";
 import Login from "./containers/Login";
@@ -27,6 +28,8 @@ export const store = createStore(
 );
 
 sagaMiddleware.run(rootSaga);
+
+startup(store);
 
 ReactDOM.render(
 	<Provider store={store}>

@@ -2,7 +2,6 @@ import { Map } from 'immutable';
 import actions from './actions';
 
 const initState = new Map({
-	idToken: '',
 	options: [
 		'address',
 		'city',
@@ -10,6 +9,7 @@ const initState = new Map({
 		'zipcode',
 		'category'
 	],
+	disabled: true,
 });
 
 export default function (
@@ -17,9 +17,10 @@ export default function (
 	action
 ) {
 	switch (action.type) {
-		case actions.SELECT_COLUMN:
-			const filteredOptions = state.get('options').filter(elm => elm !== action.name);
-			return state.set('options', filteredOptions);
+		case actions.FILTER_OPTIONS:
+			return state.set('options', action.options);
+		case actions.ENABLE_SELECTS:
+			return state.set('disabled', false);
 		default:
 			return state;
 	}

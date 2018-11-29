@@ -1,12 +1,27 @@
 import React, { Component } from 'react';
 import { Table } from 'antd';
 import { connect } from 'react-redux';
+import { message } from 'antd';
 import ColumnSelect from '../Select/index';
 import tableModel from './tableModel';
+import zipObject from 'lodash/zipObject';
+import invert from 'lodash/invert';
 import values from 'lodash/values';
+import without from 'lodash/without';
 import utilActions from '../../../../store/modules/utils/actions';
+import mapActions from '../../../../store/modules/maps/actions';
 
-const { selectColumn } = utilActions;
+const { filterOptions, enableSelects } = utilActions;
+const { setAddressList } = mapActions;
+
+
+const initialOptions = [
+	'address',
+	'city',
+	'state',
+	'zipcode',
+	'category'
+];
 
 
 class CustomTable extends Component {
@@ -33,11 +48,15 @@ class CustomTable extends Component {
 		return null;
 	}
 
+	componentDidUpdate() {
+		this.props.enableSelects();
+	}
+
 	columnGen = (num) => {
 		const columns = [];
 		for(let x = 0; x < num; x++) {
 			columns.push({
-				title: <ColumnSelect handleChange={this.handleSelectChange} colIndex={x}/>,
+				title: <ColumnSelect handleChange={this.handleSelectChange} colIndex={x} />,
 				dataIndex: `col${x}`,
 				key: `col${x}`,
 			});
@@ -47,11 +66,39 @@ class CustomTable extends Component {
 
 
 	handleSelectChange = (value, index) => {
-		const { colData } = this.state;
+		const { colData, dataSource } = this.state;
+		const { filterOptions, setAddressList } = this.props;
 		colData[index] = value;
-		this.props.selectColumn(value);
 		this.setState({ colData });
+		const selectedOptions = values(colData);
+		filterOptions(without(initialOptions, ...selectedOptions));
+		for (let key in colData) {
+			if(colData[key] == null) {
+				return;
+			}
+		}
+		if(dataSource !== null) {
+			const invertedData = invert(colData);
+			const addressCol = invertedData['address'];
+			const categoryCol = invertedData['category'];
+			const categories = [];
+			dataSource.forEach(item => {
+				categories.push(item[`col${categoryCol}`]);
+			});
+			const uniqueCategories = zipObject(categories.filter(this.getUniqueValues), []);
+			dataSource.forEach(item => {
+				if(!uniqueCategories[item[`col${categoryCol}`]]) {
+					uniqueCategories[item[`col${categoryCol}`]]= [];
+				}
+				uniqueCategories[item[`col${categoryCol}`]].push(item[`col${addressCol}`]);
+			});
+			setAddressList(uniqueCategories, message);
+		}
 	};
+
+	getUniqueValues(value, index, self) {
+		return self.indexOf(value) === index;
+	}
 
 	render() {
 		return (
@@ -60,4 +107,4 @@ class CustomTable extends Component {
 	}
 }
 
-export default connect(null, { selectColumn })(CustomTable);
+export default connect(null, { filterOptions, setAddressList, enableSelects })(CustomTable);

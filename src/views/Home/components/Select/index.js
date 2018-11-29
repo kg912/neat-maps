@@ -14,9 +14,9 @@ class CustomSelect extends Component {
 	}
 
 	render() {
-		const { colIndex, handleChange, options } = this.props;
+		const { colIndex, handleChange, options, disabled } = this.props;
 		return (
-			<Select defaultValue='SELECT' onChange={(value) => {
+			<Select defaultValue='SELECT' disabled={disabled} onChange={(value) => {
 				handleChange(value, colIndex);
 			}}>
 				{options.map(elm => <Select.Option key={elm}>{elm.toUpperCase()}</Select.Option>)}
@@ -27,5 +27,6 @@ class CustomSelect extends Component {
 //this.state.options.map(elm => <Select.Option key={elm}>{elm.toUpperCase()}</Select.Option>)}
 
 export default connect(state => ({
-	options: state.Utils.get('options')
+	options: state.Utils.get('options'),
+	disabled: state.Utils.get('disabled')
 }), null)(CustomSelect);

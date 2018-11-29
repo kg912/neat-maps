@@ -11,6 +11,7 @@
     "immutable": "^4.0.0-rc.12",
     "lodash": "^4.17.11",
     "react": "^16.6.3",
+    "react-async-script-loader": "^0.3.0",
     "react-csv-reader": "^1.1.0",
     "react-dom": "^16.6.3",
     "react-google-maps": "^9.4.5",
@@ -36,5 +37,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "@babel/plugin-proposal-decorators": "^7.1.6"
+  }
 }
