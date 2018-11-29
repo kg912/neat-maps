@@ -1,5 +1,6 @@
 import { Map } from 'immutable';
 import actions from './actions';
+import isEmpty from 'lodash/isEmpty';
 
 const initState = new Map({
 	options: [

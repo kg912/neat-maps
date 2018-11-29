@@ -2,27 +2,34 @@ import { all, takeEvery, put, fork, take, cancelled, call} from 'redux-saga/effe
 import { push } from 'react-router-redux';
 import actions from './actions';
 
-const apiURL = 'http://neat-mvp-api.herokuapp.com/v1/users/';
+const apiUrl = 'http://neat-mvp-api.herokuapp.com/v1/auth';
 
 export function* loginRequest() {
-	yield takeEvery('LOGIN_REQUEST', function*({ email, password, showNotification }) {
+	yield takeEvery('LOGIN_REQUEST', function*({ email, password, message }) {
 		// login API request
 		if(email && password ) {
-			const response = yield call(
-				fetch,
-				`${apiURL}user_JmxDuYS66eDXczz`
-			);
-			const userData = yield call([response, response.json]);
-			if (email === userData.email && password === '12345') {
-				const { first_name, last_name } = userData;
-				showNotification('success', `${first_name} ${last_name}`);
+			 // body data type must match "Content-Type" header
+			const request = yield call(fetch, apiUrl, {
+				method: 'post',
+				headers: new Headers({
+					'Content-Type': 'application/x-www-form-urlencoded'
+				}),
+				body: `email=${email}&password=${password}`
+			});
+			const response = yield call([request, request.json]);
+			if(!response.error) {
+				const { first_name, last_name } = response;
+				message.success(`Welcome, ${first_name} ${last_name}!`);
 				yield put({
 					type: actions.LOGIN_SUCCESS,
-					userData
+					userData: response
 				})
 			}
 			else {
-				showNotification('error', null);
+				message.error('No such user. Please try again');
+				yield put({
+					type: actions.LOGIN_ERROR
+				})
 			}
 		}
 

@@ -10,17 +10,10 @@ const mapActions = {
 		addressList,
 		message
 	}),
-	setMap: (map) => ({
-		type: mapActions.SET_MAP,
-		map
-	}),
 	loadedScript: (google) => ({
 		type: mapActions.SCRIPT_LOADED,
 		google,
 	}),
-	clearAddresses: () => ({
-		type: mapActions.CLEAR_ADDRESS_LIST,
-	})
 
 };
 export default mapActions;

@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import { Form, Checkbox, Button, Card, Input, Icon, notification } from 'antd';
-import styled from 'styled-components';
+import { Button, Card, Input, Icon, message } from 'antd';
 import { connect } from 'react-redux';
 
 import authActions from '../../store/modules/auth/actions';
-import showNotification from './components/Notification';
 import { Content, Container, LoginCard as LCard, Heading, StyledInput as SInput } from './style';
 
 const { login } = authActions;
@@ -19,6 +17,15 @@ class Login extends Component {
 			email: '',
 			password: '',
 		};
+	}
+
+	static getDerivedStateFromProps(nextProps, state) {
+		if(nextProps.loading !== state.loading) {
+			return {
+				loading: nextProps.loading
+			}
+		}
+		return null;
 	}
 
 	render() {
@@ -37,6 +44,7 @@ class Login extends Component {
 							type="password"
 							prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
 							onChange={e => this.setState({ password: e.target.value })}
+							onPressEnter={this.onLogin}
 						/>
 						<Button type="primary" block onClick={this.onLogin} loading={this.state.loading}>Login</Button>
 					</Content>
@@ -49,8 +57,10 @@ class Login extends Component {
 		const { login } = this.props;
 		const { email, password } = this.state;
 		this.setState({ loading: true });
-		login(email, password, showNotification);
+		login(email, password, message);
 	}
 }
 
-export default connect(null, { login })(Login);
+export default connect(state => ({
+	loading: state.Auth.get('loading')
+}), { login })(Login);

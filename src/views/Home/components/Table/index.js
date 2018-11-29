@@ -56,7 +56,7 @@ class CustomTable extends Component {
 		const columns = [];
 		for(let x = 0; x < num; x++) {
 			columns.push({
-				title: <ColumnSelect handleChange={this.handleSelectChange} colIndex={x} />,
+				title: <ColumnSelect handleChange={this.handleSelectChange} colIndex={x} id={`col${x}`}/>,
 				dataIndex: `col${x}`,
 				key: `col${x}`,
 			});

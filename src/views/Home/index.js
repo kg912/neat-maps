@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import styled from 'styled-components';
 import CSVReader from './components/CSVReader';
-import { Card, Button, Upload } from 'antd';
-import Maps from '../../components/Maps/index';
+import Maps from './components/Maps/index';
 import Table from './components/Table/index';
 
 import history from '../../store/history';

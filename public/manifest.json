@@ -3,7 +3,7 @@
   "name": "Neap Maps App",
   "icons": [
     {
-      "src": "https://neat-api-docs.herokuapp.com/images/logo.png",
+      "src": "marker.png",
       "type": "image/png"
     }
   ],

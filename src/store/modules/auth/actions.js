@@ -6,11 +6,11 @@ const authActions = {
 	LOGOUT: 'LOGOUT',
 	LOGIN_SUCCESS: 'LOGIN_SUCCESS',
 	LOGIN_ERROR: 'LOGIN_ERROR',
-	login: (email, password, showNotification) => ({
+	login: (email, password, message) => ({
 		type: authActions.LOGIN_REQUEST,
 		email,
 		password,
-		showNotification
+		message
 	}),
 	logout: () => ({
 		type: authActions.LOGOUT,
