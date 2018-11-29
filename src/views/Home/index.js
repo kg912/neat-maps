@@ -20,9 +20,9 @@ class Home extends Component {
 	}
 
 	componentWillMount() {
-		// if(!this.props.authenticated) {
-		// 	history.push('/');
-		// }
+		if(!this.props.authenticated) {
+			history.push('/');
+		}
 	}
 
 
