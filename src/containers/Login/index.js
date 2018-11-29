@@ -9,7 +9,7 @@ const { login } = authActions;
 const LoginCard = LCard.withComponent(Card);
 const StyledInput = SInput.withComponent(Input);
 
-class Login extends Component {
+export class Login extends Component {
 	constructor() {
 		super();
 		this.state = {

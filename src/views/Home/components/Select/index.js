@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Select } from 'antd';
 
-class CustomSelect extends Component {
+export class CustomSelect extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -14,7 +14,7 @@ class CustomSelect extends Component {
 
 
 	render() {
-		const { colIndex, handleChange, options, disabled, id, updateSelectValue } = this.props;
+		const { colIndex, handleChange, options, disabled, id } = this.props;
 		return (
 			<Select defaultValue='SELECT' disabled={disabled} onChange={(value) => {
 				handleChange(value, colIndex);

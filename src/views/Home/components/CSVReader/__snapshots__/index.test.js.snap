@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CSVReader Snapshot 1`] = `
+<div
+  className="csv-reader-input"
+>
+  
+  <input
+    accept="text/csv"
+    className="csv-input"
+    id={null}
+    onChange={[Function]}
+    style={Object {}}
+    type="file"
+  />
+</div>
+`;

@@ -24,7 +24,7 @@ const initialOptions = [
 ];
 
 
-class CustomTable extends Component {
+export class CustomTable extends Component {
 	constructor() {
 		super();
 		this.state = {
