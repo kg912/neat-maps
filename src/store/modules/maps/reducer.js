@@ -19,8 +19,11 @@ export default function (
 				.set('loading', false);
 		case actions.SCRIPT_LOADED:
 			return state.set('google', action.google);
-		case actions.CLEAR_ADDRESS_LIST:
-			return initState;
+		case 'RESET':
+			const coordsList = state.get('coordsList');
+			coordsList.forEach(item => item.setMap(null));
+			const google = state.get('google');
+			return initState.set('google', google);
 		default:
 			return state;
 	}

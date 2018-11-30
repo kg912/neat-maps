@@ -11,7 +11,7 @@ import without from 'lodash/without';
 import utilActions from '../../../../store/modules/utils/actions';
 import mapActions from '../../../../store/modules/maps/actions';
 
-const { filterOptions, enableSelects } = utilActions;
+const { filterOptions, enableSelects, toggleResetButton } = utilActions;
 const { setAddressList } = mapActions;
 
 
@@ -45,11 +45,12 @@ export class CustomTable extends Component {
 				dataSource: tableModel(nextProps.dataSource)
 			}
 		}
+		if(nextProps.colData !== state.colData) {
+			return {
+				colData: nextProps.colData
+			}
+		}
 		return null;
-	}
-
-	componentDidUpdate() {
-		this.props.enableSelects();
 	}
 
 	columnGen = (num) => {
@@ -69,7 +70,6 @@ export class CustomTable extends Component {
 		const { colData, dataSource } = this.state;
 		const { filterOptions, setAddressList } = this.props;
 		colData[index] = value;
-		this.setState({ colData });
 		const selectedOptions = values(colData);
 		filterOptions(without(initialOptions, ...selectedOptions));
 		for (let key in colData) {
@@ -107,4 +107,6 @@ export class CustomTable extends Component {
 	}
 }
 
-export default connect(null, { filterOptions, setAddressList, enableSelects })(CustomTable);
+export default connect(state => ({
+	colData: state.Utils.get('selectValues'),
+}), { filterOptions, setAddressList, enableSelects, toggleResetButton })(CustomTable);

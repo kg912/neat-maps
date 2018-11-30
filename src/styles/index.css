@@ -12,3 +12,37 @@ body {
     overflow-y: hidden;
     overflow-x: hidden;
 }
+
+.csv-input-container {
+    display: flex;
+    padding:5px 10px;
+    border-radius: 4px;
+    background:#1890ff;
+    border:1px solid #1890ff;
+    position:relative;
+    color:#fff;
+    text-align:center;
+    float:left;
+    cursor:pointer !important;
+    width: 100%;
+    justify-content: center;
+}
+.csv-input {
+    position: absolute;
+    z-index: 1000;
+    opacity: 0;
+    cursor: pointer !important;
+    right: 0;
+    top: 0;
+    height: 100%;
+    font-size: 24px;
+    width: 100%;
+    overflow: hidden;
+    max-width: 220px;
+}
+
+.csv-input-container:hover {
+    background: #40A9FF;
+}
+
+

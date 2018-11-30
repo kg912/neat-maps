@@ -20,16 +20,25 @@ const TitleBar = styled('div')`
 
 const Heading = styled('div')`
 	overflow: hidden;
-	width: 90%;
+	width: 75%;
 	font-size: 3em;
 	font-weight: 600;
 `;
 
 const ButtonWrapper = styled('div')`
 	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	width: 15%
+	overflow: hidden;
+`;
+
+const ResetButtonWrapper = styled('div')`
+	display: flex;
+	width: 10%;
 	justify-content: center;
 	align-items: center;
-	width: 10%
+	overflow: hidden;
 `;
 
 const Content = styled('div')`
@@ -41,4 +50,4 @@ const Content = styled('div')`
 	overflow-y: scroll;
 `;
 
-export { TitleBar, Heading, ButtonWrapper, Container, Content };
+export { TitleBar, Heading, ButtonWrapper, Container, Content, ResetButtonWrapper };

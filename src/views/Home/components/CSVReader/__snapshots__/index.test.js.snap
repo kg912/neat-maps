@@ -2,16 +2,21 @@
 
 exports[`CSVReader Snapshot 1`] = `
 <div
-  className="csv-reader-input"
+  className="csv-input-container"
 >
-  
-  <input
-    accept="text/csv"
-    className="csv-input"
-    id={null}
-    onChange={[Function]}
-    style={Object {}}
-    type="file"
-  />
+  Choose CSV
+  <div
+    className="csv-reader-input"
+  >
+    
+    <input
+      accept="text/csv"
+      className="csv-input"
+      id={null}
+      onChange={[Function]}
+      style={Object {}}
+      type="file"
+    />
+  </div>
 </div>
 `;

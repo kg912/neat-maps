@@ -18,6 +18,9 @@ export function* resolveAddresses() {
 					geoList.push({ color, address, category })
 				});
 			}
+			yield put({
+				type: 'TOGGLE_RESET_BUTTON'
+			});
 			for (let d = 0; d < geoList.length; d++) {
 				const { address, color, category } = geoList[d];
 				yield call(delay, 500);
@@ -66,9 +69,13 @@ export function* resolveAddresses() {
 				);
 			}
 			yield call(delay, 100);
+			message.success('Address geocoding complete!');
 			yield put({
 				type: RESOLVED_ADDRESS_LIST,
 				coordsList,
+			});
+			yield put({
+				type: 'TOGGLE_RESET_BUTTON'
 			});
 		}
 	});
