@@ -19,7 +19,7 @@ export default function (
 				.set('loading', false);
 		case actions.SCRIPT_LOADED:
 			return state.set('google', action.google);
-		case 'RESET':
+		case actions.RESET:
 			const coordsList = state.get('coordsList');
 			coordsList.forEach(item => item.setMap(null));
 			const google = state.get('google');

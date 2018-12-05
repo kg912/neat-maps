@@ -40,7 +40,7 @@ export default function (
 		case actions.TOGGLE_RESET_BUTTON:
 			const resetState = state.get('resetDisabled');
 			return state.set('resetDisabled', !resetState);
-		case 'RESET':
+		case actions.RESET:
 			return initState.set('selectValues', {
 				col0: 'SELECT',
 				col1: 'SELECT',

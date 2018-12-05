@@ -46,18 +46,25 @@ export class Login extends Component {
 							onChange={e => this.setState({ password: e.target.value })}
 							onPressEnter={this.onLogin}
 						/>
-						<Button type="primary" block onClick={this.onLogin} loading={this.state.loading}>Login</Button>
+						<Button type="primary" block onClick={this.onLogin} loading={this.state.loading} disabled={this.loginDisabled()}>Login</Button>
 					</Content>
 				</LoginCard>
 			</Container>
 		)
 	}
 
+	loginDisabled = () => {
+		const { email, password } = this.state;
+		return !(email.length > 0 && password.length > 0);
+	};
+
 	onLogin = () => {
 		const { login } = this.props;
 		const { email, password } = this.state;
-		this.setState({ loading: true });
-		login(email, password, message);
+		if(email.length > 0 && password.length > 0) {
+			this.setState({ loading: true });
+			login(email, password, message);
+		}
 	}
 }
 

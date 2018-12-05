@@ -9,7 +9,7 @@ const config = {
 };
 
 export default function startup(store) {
-	let google
+	let google;
 	const script = document.createElement('script');
 	script.src = mapUrl(config);
 	window.googleMapsAPILoaded = () => {

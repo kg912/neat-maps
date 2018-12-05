@@ -5,6 +5,7 @@ const mapActions = {
 	CLEAR_ADDRESS_LIST: 'CLEAR_ADDRESS_LIST',
 	SCRIPT_LOADED: 'SCRIPT_LOADED',
 	SET_MAP: 'SET_MAP',
+	RESET: 'RESET',
 	setAddressList: (addressList, message) => ({
 		type: mapActions.ADDRESS_LIST,
 		addressList,
